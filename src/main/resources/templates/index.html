@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>userList</title>
+    <style type="text/css">
+        .bodystyle{
+            filter:alpha(opacity=100);
+            -moz-opacity:1;
+            -khtml-opacity: 1;
+            opacity: 1;
+            width:100%;
+            position:absolute;
+
+            background-attachment:fixed;
+        }
+    </style>
+
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <!--<script th:replace="head::static"></script>-->
+</head>
+<body class="container">
+<header th:replace="common :: header"></header>
+<div class="text-c">
+
+    <span class="select-box inline">
+            <select id="houseStatus" name="houseStatus" class="select">
+                <option value="0">全部股票</option>
+                <option value="0000001">0000001</option>
+                <option value="0000002">0000002</option>
+                <option value="0000003">0000003</option>
+                <option value="0000003">0000004</option>
+            </select>
+		</span> 年份：
+    <input type="text" name="houseTitle" id="houseTitle" placeholder="请输入时间" style="width:250px" class="input-text">
+    <button onclick="findByCode()" id="houseSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>
+        搜索
+    </button>
+</div>
+<br>
+<div class="bodystyle">
+    <div class="with:80%"  >
+        <center>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>股票代码</th>
+                <th>时间</th>
+                <th>排盘价</th>
+                <th>最高价</th>
+                <th>收盘价</th>
+                <th>最低价</th>
+                <th>交易量</th>
+                <th>交易金额</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr  th:each="stock : ${stockInfoPage}">
+                <td th:text="${stock.id}"></td>
+                <td th:text="${stock.code}"></td>
+                <td th:text="${stock.time}"></td>
+                <td th:text="${stock.openingprice}"></td>
+                <td th:text="${stock.maximumpprice}"></td>
+                <td th:text="${stock.closingprice}"></td>
+                <td th:text="${stock.minimumprice}"></td>
+                <td th:text="${stock.tradingvolume}"></td>
+                <td th:text="${stock.tradingprice}"></td>
+            </tr>
+            </tbody>
+        </table>
+            <ul class="pagination pagination-lg" >
+                <li th:class="${indexPage==1}?'disabled' : ''"><a href="#">上一页</a></li>
+                <li th:if="${indexPage-3 >=1}" ><a th:href="@{'/index?code=' + ${code}+'&page=' + ${indexPage-3}}" th:text="${indexPage -3}" >1</a></li>
+                <li th:if="${indexPage-2 >=1}" ><a th:href="@{'/index?code=' + ${code}+'&page=' + ${indexPage-2}}" th:text="${indexPage -2}" >1</a></li>
+                <li th:if="${indexPage-1 >=1}" ><a th:href="@{'/index?code=' + ${code}+'&page=' + ${indexPage-1}}" th:text="${indexPage -1}" >1</a></li>
+                <li class="active"><a href="#" th:text="${indexPage}" >1</a></li>
+                <li th:if="${indexPage+1 <=totalPage}" ><a th:href="@{'/index?code=' + ${code}+'&page=' + ${indexPage+1}}" th:text="${indexPage +1}" >1</a></li>
+                <li th:if="${indexPage+2 <=totalPage}" ><a th:href="@{'/index?code=' + ${code}+'&page=' + ${indexPage+2}}" th:text="${indexPage +2}" >1</a></li>
+                <li th:if="${indexPage+3 <=totalPage}" ><a th:href="@{'/index?code=' + ${code}+'&page=' + ${indexPage+3}}" th:text="${indexPage +3}" >1</a></li>
+
+                <li th:class="${indexPage==totalPage}?'disabled' : ''" ><a href="#">下一页</a></li>
+                <li th:class="${totalPage}"><p th:text="${totalPage}"></p>总页数</li>
+            </ul><br>
+
+        </center>
+    </div>
+</div>
+</table>
+<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        
+    });
+    function findByCode() {
+        var code = $('#houseStatus option:selected').val();
+        window.location.href="http://localhost:8080/index?code="+code;
+
+    }
+</script>
+
+</body>
+</html>

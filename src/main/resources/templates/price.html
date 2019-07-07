@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:fragment="head">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/common.css" rel='stylesheet' type='text/css'/>
+</div>
+
+<header th:fragment="header" class="xunwu-header">
+    <div class="nav-wrap">
+        <div class="wrapper ">
+            <div class="fl">
+                <a class="logo" href="/" title="hand">
+                    <!--<img src="/static/images/logo.png">-->
+                </a>
+            </div>
+            <div class="fr nav">
+                <div class="fl">
+                    <center>
+                        <h1>新浪股票列表展示</h1>
+                        <h1>----------------------------------------------------------------------------</h1>
+                    </center>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<body class="container">
+<header th:replace="common :: header"></header>
+<div class="text-c">
+
+    <span class="select-box inline">
+            <select id="houseStatus" name="houseStatus" class="select">
+                <option value="0">全部股票</option>
+                <option value="1">0000001</option>
+                <option value="2">0000002</option>
+                <option value="3">0000003</option>
+            </select>
+		</span> 年份：
+    <input type="text" name="houseTitle" id="houseTitle" placeholder="请输入时间" style="width:250px" class="input-text">
+    <button onclick="findByCode()" id="houseSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>
+        搜索
+    </button>
+</div>
+<br>
+<div class="bodystyle">
+    <div class="with:80%"  >
+        <center>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>股票代码</th>
+                    <th>时间</th>
+                    <th>排盘价</th>
+                    <th>最高价</th>
+                    <th>收盘价</th>
+                    <th>最低价</th>
+                    <th>交易量</th>
+                    <th>交易金额</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr  th:each="stock : ${stockInfoPage}">
+                    <td th:text="${stock.id}"></td>
+                    <td th:text="${stock.code}"></td>
+                    <td th:text="${stock.time}"></td>
+                    <td th:text="${stock.openingprice}"></td>
+                    <td th:text="${stock.maximumpprice}"></td>
+                    <td th:text="${stock.closingprice}"></td>
+                    <td th:text="${stock.minimumprice}"></td>
+                    <td th:text="${stock.tradingvolume}"></td>
+                    <td th:text="${stock.tradingprice}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="pagination pagination-lg" >
+                <li th:class="${indexPage==1}?'disabled' : ''"><a href="#">上一页</a></li>
+                <li th:if="${indexPage-3 >=1}" ><a th:href="@{'/index?page=' + ${indexPage-3}}" th:text="${indexPage -3}" >1</a></li>
+                <li th:if="${indexPage-2 >=1}" ><a th:href="@{'/index?page=' + ${indexPage-2}}" th:text="${indexPage -2}" >1</a></li>
+                <li th:if="${indexPage-1 >=1}" ><a th:href="@{'/index?page=' + ${indexPage-1}}" th:text="${indexPage -1}" >1</a></li>
+                <li class="active"><a href="#" th:text="${indexPage}" >1</a></li>
+                <li th:if="${indexPage+1 <=totalPage}" ><a th:href="@{'/index?page=' + ${indexPage+1}}" th:text="${indexPage +1}" >1</a></li>
+                <li th:if="${indexPage+2 <=totalPage}" ><a th:href="@{'/index?page=' + ${indexPage+2}}" th:text="${indexPage +2}" >1</a></li>
+                <li th:if="${indexPage+3 <=totalPage}" ><a th:href="@{'/index?page=' + ${indexPage+3}}" th:text="${indexPage +3}" >1</a></li>
+
+                <li th:class="${indexPage==totalPage}?'disabled' : ''" ><a href="#">下一页</a></li>
+                <li th:class="${totalPage}"><p th:text="${totalPage}"></p>总页数</li>
+            </ul><br>
+
+        </center>
+    </div>
+</div>
+</table>
+<script type="text/javascript" src="/static/lib/datatables/1.10.15/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
+<!--<script type="text/javascript">-->
+    <!--$(function () {-->
+
+
+    <!--});-->
+    <!--function findByCode() {-->
+        <!--var code = $("#houseStatus");-->
+        <!--alert(code)-->
+        <!--$.ajax({-->
+            <!--type: 'GET',-->
+            <!--url: '/index/?code=' + code,-->
+            <!--success: function (data) {-->
+                <!--if (data.code === 200) {-->
+                    <!--alert("success")-->
+                <!--} else {-->
+                    <!--alert("error")-->
+
+                <!--}-->
+
+            <!--},-->
+            <!--error: function (jqXHR, textStatus, errorThrown) {-->
+                <!--console.log(jqXHR);-->
+                <!--layer.msg('删除失败！' + jqXHR.responseText, {icon: 5, time: 3000});-->
+            <!--}-->
+        <!--});-->
+    <!--}-->
+<!--</script>-->
+
+</body>
+</html>

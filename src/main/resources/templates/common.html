@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:fragment="head">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/common.css" rel='stylesheet' type='text/css'/>
+</div>
+
+<header th:fragment="header" class="xunwu-header">
+    <div class="nav-wrap">
+        <div class="wrapper ">
+            <div class="fl">
+                <a class="logo" href="/" title="hand">
+                    <!--<img src="/static/images/logo.png">-->
+                </a>
+            </div>
+            <div class="fr nav">
+                <div class="fl">
+                    <center>
+                        <h1>新浪股票列表展示</h1>
+                        <h1>----------------------------------------------------------------------------</h1>
+                    </center>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<div th:fragment="footer">
+    <div class="footer">
+        <div class="wrapper">
+            <div class="f-title">
+                <div class="fl">
+                    <ul>
+                        <li><a href="/" rel="nofollow" target="_blank">首页</a></li>
+                        <li><a href="/" rel="nofollow" target="_blank">了解股票</a></li>
+                        <li><a href="/" rel="nofollow" target="_blank">关于股票</a></li>
+                        <li><a href="/" rel="nofollow" target="_blank">联系站长</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="bottom">
+            <div class="copyright fl">Copyright &copy; 2019. 李肇忠 All rights reserved.</div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+</div>
+</html>
